@@ -1,6 +1,8 @@
 # Environment variables
 .env
 
+#Binary file
+expenses-go-api
 
 ### Go ###
 # Binaries for programs and plugins
