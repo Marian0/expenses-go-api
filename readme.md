@@ -9,3 +9,31 @@ Expenses API for learning purposes written in golang using gorm, gin gonic, fire
 - update env variables accordingly `nano .env`
 - run `docker-compose up`
 - run `go run expenses-go-api.go`
+
+## How to create a new migration
+- Create a new file at `database/migrations/YYYYMMDD000X.go`
+- Note that the 4 ending chars represent an unique name
+- Use the following template :
+
+```
+
+package migrations
+
+import (
+	"github.com/go-gormigrate/gormigrate/v2"
+	"github.com/marian0/expenses-go-api/models"
+	"gorm.io/gorm"
+)
+
+var MYYYYMMDD000X = gormigrate.Migration{
+	ID: "YYYYMMDD000X",
+	Migrate: func(tx *gorm.DB) error {
+    //add here schema changes
+	},
+	Rollback: func(tx *gorm.DB) error {
+    //add here reverse schema changes
+	},
+}
+
+```
+- Add this migragion object to the `database/migrate.go` array
