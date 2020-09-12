@@ -6,13 +6,13 @@ import (
 	"gorm.io/gorm"
 )
 
-//M202009120000 -
-var M202009120000 = gormigrate.Migration{
-	ID: "202009120000",
+//M202009120001 -
+var M202009120001 = gormigrate.Migration{
+	ID: "202009120001",
 	Migrate: func(tx *gorm.DB) error {
-		return tx.AutoMigrate(&models.User{})
+		return tx.AutoMigrate(&models.Expense{})
 	},
 	Rollback: func(tx *gorm.DB) error {
-		return tx.Migrator().DropTable("users")
+		return tx.Migrator().DropTable("expenses")
 	},
 }

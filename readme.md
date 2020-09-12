@@ -11,8 +11,8 @@ Expenses API for learning purposes written in golang using gorm, gin gonic, fire
 - run `go run expenses-go-api.go`
 
 ## How to create a new migration
-- Create a new file at `database/migrations/YYYYMMDD000X.go`
-- Note that the 4 ending chars represent an unique name
+- Create a new file at `database/migrations/YYYYMMDD000X_sample_summary_description.go`
+- Note that the 4 ending chars represent an unique name and the description to understand what's the migration created for
 - Use the following template :
 
 ```

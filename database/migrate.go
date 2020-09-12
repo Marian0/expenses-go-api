@@ -14,6 +14,7 @@ func MigrateDatabase(DB *gorm.DB) {
 	m := gormigrate.New(DB, gormigrate.DefaultOptions, []*gormigrate.Migration{
 		// Add migrations objects here...
 		&migrations.M202009120000,
+		&migrations.M202009120001,
 	})
 
 	if err := m.Migrate(); err != nil {
