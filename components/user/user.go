@@ -1,10 +1,8 @@
-package models
+package user
 
-import (
-	"gorm.io/gorm"
-)
+import "gorm.io/gorm"
 
-//User - Model attributes
+//User - Model
 type User struct {
 	gorm.Model
 	Name       string `json:"name"`

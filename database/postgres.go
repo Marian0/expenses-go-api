@@ -20,7 +20,7 @@ func ConnectToPosgres() *gorm.DB {
 		logger.Config{
 			SlowThreshold: time.Second, // Slow SQL threshold
 			LogLevel:      logger.Info, // Log level
-			Colorful:      false,       // Disable color
+			Colorful:      true,        // Disable color
 		},
 	)
 

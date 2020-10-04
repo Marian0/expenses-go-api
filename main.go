@@ -4,10 +4,11 @@ import (
 	"log"
 	"os"
 
+	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 	"github.com/marian0/expenses-go-api/common"
+	"github.com/marian0/expenses-go-api/components/user"
 	"github.com/marian0/expenses-go-api/database"
-	"github.com/marian0/expenses-go-api/routes"
 	"gorm.io/gorm"
 )
 
@@ -28,5 +29,20 @@ func init() {
 
 func main() {
 	log.Println("Hello Expeses Api")
-	routes.DefineRoutes(DB).Run(":" + os.Getenv("APP_PORT"))
+
+	userAPI := user.NewUserAPI(DB)
+
+	r := gin.Default()
+
+	r.GET("/users", userAPI.FindAll)
+	r.GET("/users/:id", userAPI.FindByID)
+	r.POST("/users", userAPI.Create)
+	r.PUT("/users/:id", userAPI.Update)
+	r.DELETE("/users/:id", userAPI.Delete)
+
+	err := r.Run(":" + os.Getenv("APP_PORT"))
+	if err != nil {
+		panic(err)
+	}
+
 }

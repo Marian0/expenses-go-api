@@ -1,6 +1,8 @@
-package models
+package expense
 
 import (
+	"os/user"
+
 	"gorm.io/gorm"
 )
 
@@ -11,5 +13,5 @@ type Expense struct {
 	Details string `json:"details"`
 	Amount  int    `json:"amount"`
 	UserID  int    `json:"user_id"`
-	User    User
+	User    user.User
 }

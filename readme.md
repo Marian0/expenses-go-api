@@ -8,7 +8,7 @@ Expenses API for learning purposes written in golang using gorm, gin gonic, fire
 - copy environemnt variables `cp .env.default .env`
 - update env variables accordingly `nano .env`
 - run `docker-compose up`
-- run `go run expenses-go-api.go`
+- run `go run main.go`
 
 ## How to create a new migration
 - Create a new file at `database/migrations/YYYYMMDD000X_sample_summary_description.go`
@@ -21,7 +21,6 @@ package migrations
 
 import (
 	"github.com/go-gormigrate/gormigrate/v2"
-	"github.com/marian0/expenses-go-api/models"
 	"gorm.io/gorm"
 )
 
