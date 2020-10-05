@@ -1,14 +1,19 @@
 # Expenses API
 
 ## Project description
-Expenses API for learning purposes written in golang using gorm, gin gonic, firebase auth and jwt.
+Expenses API for learning purposes written in golang using gorm v2, gin gonic, firebase auth and jwt.
 
 ## Installation
 - clone this repo
 - copy environemnt variables `cp .env.default .env`
 - update env variables accordingly `nano .env`
+- Configure Firebase (see below)
 - run `docker-compose up`
 - run `go run main.go`
+
+## Firebase
+- Get the json file
+- Copy it to `./config/serviceAccountKey.json`
 
 ## How to create a new migration
 - Create a new file at `database/migrations/YYYYMMDD000X_sample_summary_description.go`

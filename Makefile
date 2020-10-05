@@ -7,12 +7,12 @@ all: expenses-go-api
 # 	yarn
 # 	make expenses-go-api
 
-devinit: expenses-go-api.go
+devinit: main.go
 	GO111MODULE=on go mod init github.com/marian0/expenses-go-api
 	go mod tidy
 
-expenses-go-api: expenses-go-api.go
-	GO111MODULE=on go build expenses-go-api.go
+expenses-go-api: main.go
+	GO111MODULE=on go build main.go
 
 # swaggerlocal: go-swagger redoc
 

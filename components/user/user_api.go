@@ -45,6 +45,9 @@ func (p *UserAPI) FindByID(c *gin.Context) {
 
 //Create -
 func (p *UserAPI) Create(c *gin.Context) {
+	//Logged User
+	// uuid, _ := c.Get(common.CONST_UUID_IDENTIFIER)
+
 	var userDTO UserCreateDTO
 
 	err := c.ShouldBindJSON(&userDTO)

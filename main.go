@@ -2,13 +2,16 @@ package main
 
 import (
 	"log"
+	"net/http"
 	"os"
 
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 	"github.com/marian0/expenses-go-api/common"
 	"github.com/marian0/expenses-go-api/components/user"
+	"github.com/marian0/expenses-go-api/config"
 	"github.com/marian0/expenses-go-api/database"
+	"github.com/marian0/expenses-go-api/middlewares"
 	"gorm.io/gorm"
 )
 
@@ -32,17 +35,33 @@ func main() {
 
 	userAPI := user.NewUserAPI(DB)
 
-	r := gin.Default()
+	router := gin.Default()
 
-	r.GET("/users", userAPI.FindAll)
-	r.GET("/users/:id", userAPI.FindByID)
-	r.POST("/users", userAPI.Create)
-	r.PUT("/users/:id", userAPI.Update)
-	r.DELETE("/users/:id", userAPI.Delete)
+	// configure firebase
+	firebaseAuth := config.SetupFirebase()
 
-	err := r.Run(":" + os.Getenv("APP_PORT"))
+	// set firebase auth to gin context with a middleware to all incoming request
+	router.Use(func(c *gin.Context) {
+		c.Set("firebaseAuth", firebaseAuth)
+	})
+
+	router.GET("/login", func(c *gin.Context) {
+		common.RespondSuccess(c, http.StatusOK, gin.H{"message": "This endpoint should be public!"})
+	})
+
+	// using the auth middleware to validate api requests
+	router.Use(middlewares.AuthMiddleware)
+	{
+		router.GET("/users", userAPI.FindAll)
+		router.GET("/users/:id", userAPI.FindByID)
+		router.POST("/users", userAPI.Create)
+		router.PUT("/users/:id", userAPI.Update)
+		router.DELETE("/users/:id", userAPI.Delete)
+	}
+
+	err := router.Run(":" + os.Getenv("APP_PORT"))
+
 	if err != nil {
 		panic(err)
 	}
-
 }

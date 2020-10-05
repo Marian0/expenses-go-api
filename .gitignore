@@ -1,8 +1,11 @@
 # Environment variables
 .env
 
+#Firebase account key
+config/serviceAccountKey.json
+
 #Binary file
-expenses-go-api
+main
 
 ### Go ###
 # Binaries for programs and plugins
