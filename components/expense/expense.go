@@ -1,7 +1,7 @@
 package expense
 
 import (
-	"os/user"
+	"github.com/marian0/expenses-go-api/components/user"
 
 	"gorm.io/gorm"
 )

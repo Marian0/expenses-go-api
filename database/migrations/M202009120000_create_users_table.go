@@ -1,10 +1,9 @@
 package migrations
 
 import (
-	"os/user"
-
 	"github.com/go-gormigrate/gormigrate/v2"
 	"gorm.io/gorm"
+	"github.com/marian0/expenses-go-api/components/user"
 )
 
 //M202009120000 -
