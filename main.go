@@ -9,6 +9,7 @@ import (
 	"github.com/joho/godotenv"
 	"github.com/marian0/expenses-go-api/common"
 	"github.com/marian0/expenses-go-api/components/user"
+	"github.com/marian0/expenses-go-api/components/expense"
 	"github.com/marian0/expenses-go-api/config"
 	"github.com/marian0/expenses-go-api/database"
 	"github.com/marian0/expenses-go-api/middlewares"
@@ -35,6 +36,10 @@ func main() {
 
 	userAPI := user.NewUserAPI(DB)
 
+	expenseRepository := expense.NewRepository(DB)
+	expenseService := expense.NewService(expenseRepository)
+	expenseAPI := expense.NewAPI(expenseService)
+
 	router := gin.Default()
 
 	// configure firebase
@@ -57,6 +62,12 @@ func main() {
 		router.POST("/users", userAPI.Create)
 		router.PUT("/users/:id", userAPI.Update)
 		router.DELETE("/users/:id", userAPI.Delete)
+		
+		router.GET("/expenses", expenseAPI.FindAll)
+		router.GET("/expenses/:id", expenseAPI.FindByID)
+		router.POST("/expenses", expenseAPI.Create)
+		router.PUT("/expenses/:id", expenseAPI.Update)
+		router.DELETE("/expenses/:id", expenseAPI.Delete)
 	}
 
 	err := router.Run(":" + os.Getenv("APP_PORT"))
